@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload to Motoheal</title>
+    {% include 'supportingfiles.html' %}
+
+</head>
+<body>
+    <section class="row p-4">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3 class="text-success text-center">Upload Car Details here</h3>
+            <h4 class="text-success">{{success}}</h4>
+
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label><b>Car Registration Plate: </b></label> <br>
+                <input type="text" name="carid" placeholder="Enter the Registration Plate" class="form-control" required>
+
+                <label><b>Car Make: </b></label> <br>
+                <input type="text" name="make" placeholder="Enter the Car Make" class="form-control" required>
+
+                <label><b>Car Model: </b></label> <br>
+                <input type="text" name="model" placeholder="Enter the Car Model" class="form-control" required>
+
+                <label><b>Year of Manufacture: </b></label> <br>
+                <input type="text" name="year" placeholder="Enter the Year of Manufacture" class="form-control" required>
+
+                <label><b> Car Price: </b></label> <br>
+                <input type="text" name="price" placeholder="Enter the Car Price" class="form-control" required>
+
+                <label><b>Transmission: </b></label> <br>
+                <select name="transmission" class="form-control">
+                    <option value="N/A"> Choose Transmission</option>
+                    <option value="Automatic"> Automatic</option>
+                    <option value="Manual"> Manual</option>
+                    <option value="Electric"> Electric</option>
+                </select> <br>
+
+                <label><b>Fuel Type: </b></label> <br>
+                    <input type="radio" name="fuel" value="Diesel" required><label><b>Diesel</b></label>
+                    <input type="radio" name="fuel" value="Petrol"><label><b>Petrol</b></label>
+                    <input type="radio" name="fuel" value="Electric"><label><b>Electric</b></label> <br> <br>
+
+                <label><b>Engine Size: </b></label> <br>
+                <input type="text" name="cc" placeholder="Enter the Engine Capacity" class="form-control" required> <br>
+
+                <label><b>Upload  Car Image: </b></label> <br>
+                <input type="file" name="imageUrl" placeholder="Upload the Car Image" class="form-control" required> <br>
+
+                <label><b>Car Description: </b></label> <br>
+                <textarea name="description" placeholder="Brief Description about the Car" class="form-control" required></textarea>
+
+                <label><b>Dealers ID: </b></label> <br>
+                <input type="text" name="dealersId" placeholder="Provide Dealers ID" class="form-control" required>
+               
+
+                <input type="submit" value="Upload Car" class="btn btn-success">
+
+            </form>
+
+        </div>
+        <div class="col-md-3"></div>
+    </section>
+    
+    
+</body>
+</html>

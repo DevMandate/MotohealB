@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Car</title>
+    {% include 'supportingfiles.html' %}
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <!-- {{car}} -->
+
+    <section class="row p-4">
+        <div class="col-md-6">
+            <center><img src="../static/images/{{car[8]}}" height="300px" width="300px"></center>
+
+            <h3 class="text-center text-success">{{ car[2] }}</h3>
+        </div>
+        <div class="col-md-6">
+            <p>{{car[9]}}</p>
+            <h2>Kes: <span class="text-warning">{{car[4]}}</span></h2>
+            <h3>Category: <span class="text-info">{{car[10]}}</span></h3>
+        </div>
+    </section>
+
+    
+
+
+    
+</body>
+</html>
