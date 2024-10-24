@@ -6,6 +6,7 @@
     <title>Homepage</title>
 
     {% include 'supportingfiles.html' %}
+    <link rel="stylesheet" href="../static/css/footer.css">
 
 </head>
 <body>
@@ -74,7 +75,7 @@
     </section>
 
     <center><h2 class="text-danger">Mercedes-Benz</h2></center>
-    <!-- {{Nissan}} -->
+    <!-- {{Merc}} -->
     <section class="slider p-4">
         <ul class="cs-hidden autoWidth">
             {% for car in Mercedes %}
@@ -103,7 +104,7 @@
     </section>
 
     <center><h2 class="text-danger">Honda</h2></center>
-    <!-- {{Nissan}} -->
+    <!-- {{Honda}} -->
     <section class="slider p-4">
         <ul class="cs-hidden autoWidth">
             {% for car in Honda %}
@@ -131,6 +132,9 @@
 
     </section>
 
+
+     <!-- footer -->
+     {% include 'footer.html' %}
 
 
 

@@ -1,7 +1,13 @@
-from flask import Flask, render_template, request
+from flask import *
 import pymysql
 
 motoheal = Flask(__name__)
+
+# we are going to create a secret a secret key that will enamble us to secure our session just incase of an attack. The secret key is just randomized string of values
+
+motoheal.secret_key = "wyeriu346789yq3894yithkagfi7uerjg345qr356ghvnhf"
+
+
 
 def db_connection():
     return pymysql.connect(host ='localhost', user ='root' , password = '', database = 'flask_prac')
@@ -81,8 +87,40 @@ def register():
 
 
 
+@motoheal.route("/login", methods=["POST", "GET"])
+def login():
+    if request.method == "GET":
+        return render_template("login.html")
+    else:
+        # get the details entered on the form and store them in a variable
+        username = request.form["username"]
+        password = request.form["password"]
+        # create a db connection
+        connection = db_connection()
+        # create an sql query. The %s is a placeholder, to be replaced with actual data when we execute the sql
+        sql = "SELECT * FROM `users` WHERE username = %s and password=%s"
+        # create a varible that will hold the data gotten from the form
+        data = (username, password)
+        # create a cursor that will help to execute the sql
+        cursor = connection.cursor()
+        # execute the query
+        cursor.execute(sql, data)
 
+        # fetch one person
+        user = cursor.fetchone()
 
+        if cursor.rowcount== 0:
+            return render_template("login.html", error="Invalid Credentials")
+        else:
+            session["key"] = username
+            session["profile_picture"] = user[6]
+            return redirect("/")
+
+@motoheal.route('/logout')
+def logout():
+    # remobe user from the session
+    session.clear()
+    return redirect('/')
 
 
 
@@ -105,60 +143,34 @@ def singlecar(car_id):
     return render_template("singlecar.html", car = car )
 
 
-@motoheal.route('/parts', methods = ['POST' , 'GET'])
-def parts():
+@motoheal.route('/vehicles', methods = ['POST' , 'GET'])
+def vehicles():
     if request.method == 'GET':
-        return render_template('parts.html')
+        return render_template('vehicles.html')
 
 
 
 
-@motoheal.route('/services', methods = ['POST' , 'GET'])
-def services():
+@motoheal.route('/motoscooters', methods = ['POST' , 'GET'])
+def motoscooters():
     if request.method == 'GET':
-        return render_template('services.html')
+        return render_template('motoscooters.html')
 
 
 
 
-@motoheal.route('/customer_reviews', methods = ['POST' , 'GET'])
-def customers():
+@motoheal.route('/hire', methods = ['POST' , 'GET'])
+def hire():
     if request.method == 'GET':
-        return render_template('customer_reviews.html')
+        return render_template('hire.html')
 
 
 
 
-@motoheal.route('/search', methods = ['POST' , 'GET'])
-def search():
+@motoheal.route('/accessories', methods = ['POST' , 'GET'])
+def accessories():
     if request.method == 'GET':
-        return render_template('search.html')
-
-
-
-
-@motoheal.route('/aboutus', methods = ['POST' , 'GET'])
-def aboutus():
-    if request.method == 'GET':
-        return render_template('aboutus.html')
-
-
-
-
-
-@motoheal.route('/faqs', methods = ['POST' , 'GET'])
-def faqs():
-    if request.method == 'GET':
-        return render_template('faqs.html')
-
-
-
-
-@motoheal.route('/contactus', methods = ['POST' , 'GET'])
-def contactus():
-    if request.method == 'GET':
-        return render_template('ucontactus.html')
-    
+        return render_template('accessories.html')
 
 
 
@@ -170,6 +182,18 @@ def blog():
 
 
 
+
+
+@motoheal.route('/news', methods = ['POST' , 'GET'])
+def news():
+    if request.method == 'GET':
+        return render_template('news.html')
+
+
+@motoheal.route('/contact', methods = ['POST' , 'GET'])
+def contact():
+    if request.method == 'GET':
+        return render_template('contact.html')
 
 
 
