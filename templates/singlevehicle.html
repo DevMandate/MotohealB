@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Vehicle</title>
+    {% include 'supportingfiles.html' %}
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <section class="row p-4">
+        <div class="col-md-6">
+            <center>
+                <img src="../static/images/{{ singlevehicle[11] }}" alt="Vehicle Image" height="300px" width="300px">
+            </center>
+            <h3 class="text-center text-success">{{ singlevehicle[3] }}</h3> <!-- Vehicle name or model -->
+        </div>
+        <div class="col-md-6">
+            <p>{{ singlevehicle[10] }}</p> <!-- Vehicle description -->
+            <h2>KES: <span class="text-warning">{{ singlevehicle[5] }}</span></h2> <!-- Vehicle price -->
+            <h3>Category: <span class="text-info">{{ singlevehicle[12] }}</span></h3> <!-- Vehicle category -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

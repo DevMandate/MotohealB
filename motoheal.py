@@ -143,34 +143,110 @@ def singlecar(car_id):
     return render_template("singlecar.html", car = car )
 
 
-@motoheal.route('/vehicles', methods = ['POST' , 'GET'])
+@motoheal.route('/vehicles', methods = ['GET'])
 def vehicles():
-    if request.method == 'GET':
-        return render_template('vehicles.html')
+    connection = db_connection()
+
+    # vehicles Query
+    sql = "SELECT * FROM `vehicles`"
+
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    vehicles = cursor.fetchall()
+    return render_template('vehicles.html', vehicles = vehicles)
+    
+    
+
+@motoheal.route('/singlevehicle/<id>')
+def single_vehicle(id):
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `vehicles` WHERE id = %s"  # Fetch single vehicle by ID
+    cursor.execute(sql, (id,))
+    singlevehicle = cursor.fetchone()
+
+    return render_template("singlevehicle.html", singlevehicle=singlevehicle)
 
 
 
 
-@motoheal.route('/motoscooters', methods = ['POST' , 'GET'])
-def motoscooters():
-    if request.method == 'GET':
-        return render_template('motoscooters.html')
+# Route for motorcycles page
+@motoheal.route('/motorcycles', methods=['GET'])
+def motorcycles():
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `motorcycles`"  # Fetch all motorcycles
+    cursor.execute(sql)
+    motorcycles = cursor.fetchall()  # Retrieve all motorcycles as a list of tuples
+
+    return render_template('motorcycles.html', motorcycles=motorcycles)
+
+
+# Route for single motorcycle page
+@motoheal.route('/singlemotorcycle/<id>')
+def single_motorcycle(id):
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `motorcycles` WHERE id = %s"  # Fetch single motorcycle by ID
+    cursor.execute(sql, (id,))
+    singlemotorcycle = cursor.fetchone()
+
+    return render_template("singlemotorcycle.html", singlemotorcycle=singlemotorcycle)
 
 
 
 
-@motoheal.route('/hire', methods = ['POST' , 'GET'])
-def hire():
-    if request.method == 'GET':
-        return render_template('hire.html')
+
+# Route for rental services page
+@motoheal.route('/rentals', methods=['GET'])
+def rentals():
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `rental_services`"  # Fetch all rental services
+    cursor.execute(sql)
+    rentals = cursor.fetchall()  # Retrieve all rentals as a list of tuples
+
+    return render_template('rentals.html', rentals=rentals)
+
+
+# Route for single rental service page
+@motoheal.route('/singlerental/<id>')
+def single_rental(id):
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `rental_services` WHERE id = %s"  # Fetch single rental by ID
+    cursor.execute(sql, (id,))
+    singlerental = cursor.fetchone()
+
+    return render_template("singlerental.html", singlerental=singlerental)
 
 
 
 
-@motoheal.route('/accessories', methods = ['POST' , 'GET'])
+
+# Route for accessories page
+@motoheal.route('/accessories', methods=['GET'])
 def accessories():
-    if request.method == 'GET':
-        return render_template('accessories.html')
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `accessories`"  # Fetch all accessories
+    cursor.execute(sql)
+    accessories = cursor.fetchall()  # Retrieve all accessories as a list of tuples
+
+    return render_template('accessories.html', accessories=accessories)
+
+
+# Route for single accessory page
+@motoheal.route('/singleaccessory/<id>')
+def single_accessory(id):
+    connection = db_connection()
+    cursor = connection.cursor()
+    sql = "SELECT * FROM `accessories` WHERE id = %s"  # Fetch single accessory by ID
+    cursor.execute(sql, (id,))
+    singleaccessory = cursor.fetchone()
+
+    return render_template("singleaccessory.html", singleaccessory=singleaccessory)
+
 
 
 
@@ -241,6 +317,175 @@ def upload():
         connection.commit()
         return render_template('upload.html', success = "Car uploaded successfully ")
     
+
+
+@motoheal.route("/uploadVehicle", methods=['POST', 'GET'])
+def upload_vehicle():
+    if request.method == 'GET':
+        return render_template('uploadVehicle.html')
+    else:
+        registration_plate = request.form['vehicle_id']  
+        make = request.form['make']
+        model = request.form['model']
+        year = request.form['year']
+        price = request.form['price']
+        mileage = request.form['mileage']
+        transmission = request.form['transmission']
+        fuel = request.form['fuel_type']
+        color = request.form['color']
+        image_url = request.files['imageUrl']
+        image_url.save("static/images/" + image_url.filename)
+        description = request.form['description']
+        availability = request.form.get('availability', True) 
+
+        connection = db_connection()
+
+        sql = """
+        INSERT INTO `vehicles`(
+            `vehicle_id`, `make`, `model`, `year`, `price`, `mileage`, 
+            `transmission`, `fuel_type`, `color`, `image_url`, `description`, `availability`
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            registration_plate, make, model, year, price, mileage,
+            transmission, fuel, color, image_url.filename, description, availability
+        )
+
+        cursor = connection.cursor()
+
+        cursor.execute(sql, data)
+        connection.commit()
+
+        return render_template('uploadVehicle.html', success="Vehicle uploaded successfully")
+
+
+
+@motoheal.route("/uploadMotorcycle", methods=['POST', 'GET'])
+def upload_motorcycle():
+    if request.method == 'GET':
+        return render_template('uploadMotorcycle.html')
+    else:
+        make = request.form['make']
+        model = request.form['model']
+        year = request.form['year']
+        price = request.form['price']
+        engine_capacity = request.form['engine_capacity']
+        type = request.form['type']
+        mileage = request.form['mileage']
+        fuel_type = request.form['fuel_type']
+        image_url = request.files['imageUrl']
+        image_url.save("static/images/" + image_url.filename)
+        description = request.form.get('description', '')  # Optional field
+        availability = request.form.get('availability', True)  # Defaults to True if not specified
+
+        connection = db_connection()
+
+        sql = """
+        INSERT INTO `motorcycles`(
+            `make`, `model`, `year`, `price`, `engine_capacity`, `type`, `mileage`, 
+            `fuel_type`, `image_url`, `description`, `availability`
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            make, model, year, price, engine_capacity, type, mileage,
+            fuel_type, image_url.filename, description, availability
+        )
+
+        cursor = connection.cursor()
+
+        cursor.execute(sql, data)
+        connection.commit()
+
+        return render_template('uploadMotorcycle.html', success="Motorcycle uploaded successfully")
+
+
+
+
+@motoheal.route("/uploadAccessory", methods=['POST', 'GET'])
+def upload_accessory():
+    if request.method == 'GET':
+        return render_template('uploadAccessory.html')
+    else:
+        name = request.form['name']
+        category = request.form['category']
+        price = request.form['price']
+        brand = request.form.get('brand', '')  # Optional field
+        description = request.form.get('description', '')  # Optional field
+        image_url = request.files['imageUrl']
+        image_url.save("static/images/" + image_url.filename)
+        stock_quantity = request.form['stock_quantity']
+        availability = request.form.get('availability', True)
+
+        connection = db_connection()
+
+        sql = """
+        INSERT INTO `accessories`(
+            `name`, `category`, `price`, `brand`, `description`, `image_url`, `stock_quantity`, `availability`
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            name, category, price, brand, description, image_url.filename, stock_quantity, availability
+        )
+
+        cursor = connection.cursor()
+
+        cursor.execute(sql, data)
+        connection.commit()
+
+        return render_template('uploadAccessory.html', success="Accessory uploaded successfully")
+
+
+
+
+@motoheal.route("/uploadRentalService", methods=['POST', 'GET'])
+def upload_rental_service():
+    if request.method == 'GET':
+        return render_template('uploadRentalService.html')
+    else:
+        vehicle_type = request.form['vehicle_type']
+        rental_price = request.form['rental_price']
+        rental_duration = request.form['rental_duration']
+        availability = request.form.get('availability', True)
+        description = request.form.get('description', '')  # Optional field
+        image_url = request.files['imageUrl']
+        image_url.save("static/images/" + image_url.filename)
+
+        connection = db_connection()
+
+        sql = """
+        INSERT INTO `rental_services`(
+            `vehicle_type`, `rental_price`, `rental_duration`, `availability`, `description`, `image_url`
+        ) 
+        VALUES (%s, %s, %s, %s, %s, %s)
+        """
+
+        data = (
+            vehicle_type, rental_price, rental_duration, availability, description, image_url.filename
+        )
+
+        cursor = connection.cursor()
+
+        cursor.execute(sql, data)
+        connection.commit()
+
+        return render_template('uploadRentalService.html', success="Rental service uploaded successfully")
+
+
+
+
+
+
+
+
+
+
+
 
 
 

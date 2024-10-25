@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Rental Service</title>
+    {% include 'supportingfiles.html' %}
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <section class="row p-4">
+        <div class="col-md-6">
+            <center>
+                <img src="../static/images/{{ singlerental[6] }}" alt="Rental Image" height="300px" width="300px">
+            </center>
+            <h3 class="text-center text-success">{{ singlerental[1] }}</h3> <!-- Vehicle type -->
+        </div>
+        <div class="col-md-6">
+            <p>{{ singlerental[5] }}</p> <!-- Rental description -->
+            <h2>Price per Day: <span class="text-warning">KES {{ singlerental[2] }}</span></h2> <!-- Rental price -->
+            <h3>Duration: <span class="text-info">{{ singlerental[3] }} days</span></h3> <!-- Rental duration -->
+            <h3>Availability: <span class="text-info">{{ 'Available' if singlerental[4] else 'Not Available' }}</span></h3> <!-- Availability status -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

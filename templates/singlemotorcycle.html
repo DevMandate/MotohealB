@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Motorcycle</title>
+    {% include 'supportingfiles.html' %}
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <section class="row p-4">
+        <div class="col-md-6">
+            <center>
+                <img src="../static/images/{{ singlemotorcycle[10] }}" alt="Motorcycle Image" height="300px" width="300px">
+            </center>
+            <h3 class="text-center text-success">{{ singlemotorcycle[1] }} {{ singlemotorcycle[2] }}</h3> <!-- Motorcycle make and model -->
+        </div>
+        <div class="col-md-6">
+            <p>{{ singlemotorcycle[9] }}</p> <!-- Motorcycle description -->
+            <h2>KES: <span class="text-warning">{{ singlemotorcycle[4] }}</span></h2> <!-- Motorcycle price -->
+            <h3>Engine Capacity: <span class="text-info">{{ singlemotorcycle[5] }} cc</span></h3> <!-- Engine capacity -->
+            <h3>Type: <span class="text-info">{{ singlemotorcycle[6] }}</span></h3> <!-- Motorcycle type -->
+            <h3>Mileage: <span class="text-info">{{ singlemotorcycle[7] }} km</span></h3> <!-- Mileage -->
+            <h3>Fuel Type: <span class="text-info">{{ singlemotorcycle[8] }}</span></h3> <!-- Fuel type -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

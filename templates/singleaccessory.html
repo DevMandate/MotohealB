@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Accessory</title>
+    {% include 'supportingfiles.html' %}
+    <link rel="stylesheet" href="../static/css/footer.css">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <section class="row p-4">
+        <div class="col-md-6">
+            <center>
+                <img src="../static/images/{{ singleaccessory[6] }}" alt="Accessory Image" height="300px" width="300px">
+            </center>
+            <h3 class="text-center text-success">{{ singleaccessory[1] }}</h3> <!-- Accessory name -->
+        </div>
+        <div class="col-md-6">
+            <p>{{ singleaccessory[5] }}</p> <!-- Accessory description -->
+            <h2>KES: <span class="text-warning">{{ singleaccessory[3] }}</span></h2> <!-- Accessory price -->
+            <h3>Category: <span class="text-info">{{ singleaccessory[2] }}</span></h3> <!-- Accessory category -->
+            <h3>Brand: <span class="text-info">{{ singleaccessory[4] }}</span></h3> <!-- Accessory brand -->
+            <h3>Stock Quantity: <span class="text-info">{{ singleaccessory[7] }}</span></h3> <!-- Stock quantity -->
+        </div>
+    </section>
+
+    <!-- footer -->
+    {% include 'footer.html' %}
+</body>
+</html>

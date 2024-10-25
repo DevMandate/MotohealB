@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessories</title>
+    <title>Rental Services</title>
     {% include 'supportingfiles.html' %}
     <link rel="stylesheet" href="../static/css/parts.css">
     <link rel="stylesheet" href="../static/css/footer.css">
@@ -11,26 +11,26 @@
 <body>
     {% include 'navbar.html' %}
 
-    <center><h2 class="text-danger">Available Accessories</h2></center>
+    <center><h2 class="text-danger">Available Rentals</h2></center>
     
     <section class="slider p-4">
         <ul class="cs-hidden autoWidth">
-            {% for accessory in accessories %}
+            {% for rental in rentals %}
             <li>
                 <div class="box">
                     <div class="slide-img">
-                        <img src="../static/images/{{ accessory[6] }}" alt="Accessory Image" height="150" width="150">
+                        <img src="../static/images/{{ rental[6] }}" alt="Rental Image" height="150" width="150">
 
                         <div class="overlay">
-                            <!-- Link to single accessory page with the correct accessory ID -->
-                            <a href="/singleaccessory/{{ accessory[0] }}" class="buy-btn">View Details</a>
+                            <!-- Link to single rental page with the correct rental ID -->
+                            <a href="/singlerental/{{ rental[0] }}" class="buy-btn">View Details</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="detail-box">
-                    <b class="text-dark">{{ accessory[1] }}</b> <!-- Accessory name -->
-                    <b class="text-success">KES {{ accessory[3] }}</b> <!-- Accessory price -->
+                    <b class="text-dark">{{ rental[1] }}</b> <!-- Vehicle type -->
+                    <b class="text-success">KES {{ rental[2] }}/day</b> <!-- Rental price -->
                 </div>
             </li>
             {% endfor %}
