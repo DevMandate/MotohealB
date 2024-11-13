@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookings Form</title>
+</head>
+<body>
+    <form action="/singlerental/{{ singlerental[0] }}" method="POST" class="booking-form p-4" style="background-color: #f8f9fa; border-radius: 8px; max-width: 500px; margin: auto; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+
+        <h3 class="text-center mb-4" style="color: #343a40;">Book this Car</h3>
+        
+        <!-- Full Name Field -->
+        <div class="form-group mb-3">
+            <label for="full_name" style="font-weight: 500; color: #495057;">Full Name</label>
+            <input type="text" id="full_name" name="full_name" class="form-control" placeholder="Your full name" required style="border-radius: 5px;">
+        </div>
+        
+        <!-- Email Address Field -->
+        <div class="form-group mb-3">
+            <label for="email" style="font-weight: 500; color: #495057;">Email Address</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Your email" required style="border-radius: 5px;">
+        </div>
+        
+        <!-- Phone Number Field -->
+        <div class="form-group mb-4">
+            <label for="phone" style="font-weight: 500; color: #495057;">Phone Number</label>
+            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Your phone number" required style="border-radius: 5px;">
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-100" style="border-radius: 5px; font-weight: 500; background-color: #007bff; border: none;">
+                Book This Car
+            </button>
+        </div>
+    </form>
+    
+    
+</body>
+</html>

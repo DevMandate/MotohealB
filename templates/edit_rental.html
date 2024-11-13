@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Rental Service</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="mb-4">Edit Rental Service</h2>
+    <form action="/rentals/edit/{{ rental[0] }}" method="post">
+        <!-- Vehicle Type -->
+        <div class="form-group">
+            <label for="vehicle_type">Vehicle Type</label>
+            <input type="text" class="form-control" id="vehicle_type" name="vehicle_type" value="{{ rental[1] }}" required>
+        </div>
+
+        <!-- Rental Price -->
+        <div class="form-group">
+            <label for="rental_price">Rental Price (per day)</label>
+            <input type="number" step="0.01" class="form-control" id="rental_price" name="rental_price" value="{{ rental[2] }}" required>
+        </div>
+
+        <!-- Rental Duration -->
+        <div class="form-group">
+            <label for="rental_duration">Rental Duration (in days)</label>
+            <input type="number" class="form-control" id="rental_duration" name="rental_duration" value="{{ rental[3] }}" required>
+        </div>
+
+        <!-- Availability -->
+        <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="availability" name="availability" {% if rental[4] == 1 %}checked{% endif %}>
+            <label class="form-check-label" for="availability">Available</label>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{ rental[5] }}</textarea>
+        </div>
+
+        <!-- Image Name -->
+        <div class="form-group">
+            <label for="image_name">Image Name</label>
+            <input type="text" class="form-control" id="image_name" name="image_name" value="{{ rental[6].split('/')[-1] }}" required>
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="/rentals/availability" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<!-- Bootstrap JavaScript and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

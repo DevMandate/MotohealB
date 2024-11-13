@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Car</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Edit Car</h1>
+        <form action="{{ url_for('edit_car', car_id=car[0]) }}" method="POST">
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="make" class="form-label">Make</label>
+                    <input type="text" class="form-control" id="make" name="make" value="{{ car[1] }}" required>
+                </div>
+                <div class="col">
+                    <label for="model" class="form-label">Model</label>
+                    <input type="text" class="form-control" id="model" name="model" value="{{ car[2] }}" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="year" class="form-label">Year</label>
+                    <input type="text" class="form-control" id="year" name="year" value="{{ car[3] }}" required>
+                </div>
+                <div class="col">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="text" class="form-control" id="price" name="price" value="{{ car[4] }}" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="transmission" class="form-label">Transmission</label>
+                    <input type="text" class="form-control" id="transmission" name="transmission" value="{{ car[5] }}" required>
+                </div>
+                <div class="col">
+                    <label for="fuel_type" class="form-label">Fuel Type</label>
+                    <input type="text" class="form-control" id="fuel_type" name="fuel_type" value="{{ car[6] }}" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="engine_size" class="form-label">Engine Size</label>
+                    <input type="text" class="form-control" id="engine_size" name="engine_size" value="{{ car[7] }}" required>
+                </div>
+                <div class="col">
+                    <label for="image_url" class="form-label">Image URL</label>
+                    <input type="text" class="form-control" id="image_url" name="image_url" value="{{ car[8] }}" required>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required>{{ car[9] }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label for="dealers_id" class="form-label">Dealer ID</label>
+                <input type="text" class="form-control" id="dealers_id" name="dealers_id" value="{{ car[10] }}" required>
+            </div>
+            <button type="submit" class="btn btn-success">Save Changes</button>
+            <a href="{{ url_for('cars') }}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

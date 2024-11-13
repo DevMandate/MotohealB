@@ -6,17 +6,299 @@
     <title>Contact</title>
     {% include 'supportingfiles.html' %}
     <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="stylesheet" href="../static/css/contact.css">
 </head>
 <body>
     {% include 'navbar.html' %}
 
 
-
-
-
-    <!-- footer -->
-    {% include 'footer.html' %}
-
+        <!-- Contact Us Header Section starts here -->
+        <header id="contact-header" class="contact-header">
+            <div class="header-content">
+              <h1 class="page-title" data-aos="fade-down">Contact Us – We're Here to Help</h1>
+              <p class="welcome-text" data-aos="fade-up" data-aos-delay="800">
+                Reach out for inquiries, assistance, or service bookings. Our team is ready to help!
+              </p>
+              <a href="tel:+254700123456" class="call-now" data-aos="zoom-in" data-aos-delay="400">
+                Call Us: +254 796 578 077
+              </a>
+            </div>
+          </header>
+      
+          <script>
+            // Add glow effect to Call Now button on hover
+          const callNowButton = document.querySelector('.call-now');
+      
+          callNowButton.addEventListener('mouseover', () => {
+            callNowButton.style.boxShadow = '0 8px 20px rgba(255, 80, 30, 0.7)';
+          });
+      
+          callNowButton.addEventListener('mouseout', () => {
+            callNowButton.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.3)';
+          });
+      
+          </script>
+          <br>
+           <!-- Contact Us Header Section ends here -->
+      
+      
+           <!-- Contact Us Form Section starts here -->
+          <!-- Contact Us Form Section (Column Mode) -->
+          
+          <!-- Flash message -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     
+          <!-- Contact Form -->
+          <form action="{{ url_for('contact') }}" method="POST" class="mt-4">
+              <div class="mb-3">
+                  <label for="full_name" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="full_name" name="full_name" required>
+              </div>
+              <div class="mb-3">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+              <div class="mb-3">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="subject" name="subject" required>
+              </div>
+              <div class="mb-3">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+
+
+
+
+      
+      
+          <script>
+                document.querySelector('.contact-form').addEventListener('submit', function (e) {
+            e.preventDefault(); // Prevent actual form submission for demo purposes
+            alert('Thank you! Your message has been successfully sent.');
+            
+            // Optional: Clear the form fields after submission
+            document.querySelector('.contact-form').reset();
+          });
+      
+          </script>
+          <br>
+      
+           <!-- Contact Us Form Section ends here -->
+      
+      
+          <!-- Direct Links to Help Center and Support Pages Section starts here -->
+          <section id="support-section" class="support-section">
+            <div class="support-container">
+              <h2 class="support-title" data-aos="fade-up">How Can We Help You?</h2>
+              <p class="support-description" data-aos="fade-up" data-aos-delay="100">
+                Explore our Help Center, connect with our support team, or start a live chat for instant assistance.
+              </p>
+      
+              <div class="support-links" data-aos="fade-up" data-aos-delay="200">
+                <!-- Help Center Link -->
+                <a href="/help-center" class="support-link help-center" data-aos="fade-up" data-aos-delay="300">
+                  <i class="fas fa-question-circle"></i>
+                  <div class="link-details">
+                    <h3>Help Center</h3>
+                    <p>Find answers to common questions</p>
+                  </div>
+                </a>
+      
+                <!-- Live Chat Button -->
+                <a href="javascript:void(0);" class="support-link live-chat" id="liveChatButton" data-aos="fade-up" data-aos-delay="400">
+                  <i class="fas fa-comments"></i>
+                  <div class="link-details">
+                    <h3>Live Chat</h3>
+                    <p>Chat with us for immediate support</p>
+                  </div>
+                </a>
+      
+                <!-- Support Email -->
+                <a href="mailto:support@motheal.com" class="support-link support-email" data-aos="fade-up" data-aos-delay="500">
+                  <i class="fas fa-envelope"></i>
+                  <div class="link-details">
+                    <h3>Email Support</h3>
+                    <p>Contact us via email for inquiries</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </section>
+      
+          <!-- JavaScript for Live Chat Modal -->
+          <script>
+            document.getElementById("liveChatButton").addEventListener("click", function() {
+              alert("Live Chat will be available soon!");
+              // You can replace this with your live chat modal or widget integration.
+            });
+          </script>
+          <br>
+      
+          <!-- Direct Links to Help Center ends Here -->
+      
+         
+          <!-- Company Location Section starts here -->
+          <section id="location-section" class="location-section">
+            <div class="container">
+              <!-- Section Title -->
+              <h2 class="location-title" data-aos="fade-up">Visit Us at Our Dealership</h2>
+              <p class="location-description" data-aos="fade-up" data-aos-delay="100">
+                Find MotoHeal at our dealership and service center in Nairobi, Kenya. We are here to serve you with all your car needs.
+              </p>
+      
+              <!-- Google Maps and Address Row -->
+              <div class="row">
+                <!-- Google Maps Embed -->
+                <div class="col-lg-6 col-md-12" data-aos="fade-right" data-aos-delay="200">
+                  <div class="google-maps">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15955.681663095684!2d36.821946119840636!3d-1.2832238194353366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x99c3b4e2a17c5b0f!2sMotoHeal%20Dealership!5e0!3m2!1sen!2ske!4v1604512391023!5m2!1sen!2ske"
+                      width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+                    </iframe>
+                  </div>
+                </div>
+      
+                <!-- Address and Operating Hours -->
+                <div class="col-lg-6 col-md-12" data-aos="fade-left" data-aos-delay="300">
+                  <div class="location-details">
+                    <!-- Address -->
+                    <h3 class="location-heading">Our Address</h3>
+                    <p class="location-text">
+                      MotoHeal Dealership<br>
+                      1234 Kenyatta Avenue, Nairobi, Kenya<br>
+                      Postal Code: 00100
+                    </p>
+      
+                    <!-- Operating Hours -->
+                    <h3 class="location-heading">Operating Hours</h3>
+                    <p class="location-text">
+                      Monday - Friday: 8:00 AM - 6:00 PM<br>
+                      Saturday: 9:00 AM - 4:00 PM<br>
+                      Sunday: Closed
+                    </p>
+      
+                    <!-- Contact Info -->
+                    <h3 class="location-heading">Contact Us</h3>
+                    <p class="location-text">
+                      Phone: <a href="tel:+254796578077" class="location-phone">+254 796 578 077</a><br>
+                      Email: <a href="mailto:support@motoheal.com" class="location-email">support@motoheal.com</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      
+          <script>
+                // Example: Tooltip for Address Copy (Optional)
+          document.querySelector('.location-phone').addEventListener('click', function() {
+            alert('You are calling MotoHeal. Please wait...');
+          });
+      
+          </script>
+          <br>
+      
+              <!-- Company Location Section ends here -->
+      
+              <!-- Social Media and Operating Hours Section starts here -->
+          <section id="contact-details-section" class="contact-details-section">
+            <div class="container">
+              <!-- Operating Hours Section -->
+              <div class="row operating-hours" data-aos="fade-up">
+                <div class="col-lg-6 col-md-6">
+                  <h2 class="section-title">Operating Hours</h2>
+                  <ul class="hours-list">
+                    <li><span>Monday - Friday:</span> 8:00 AM - 6:00 PM</li>
+                    <li><span>Saturday:</span> 9:00 AM - 4:00 PM</li>
+                    <li><span>Sunday & Holidays:</span> Closed</li>
+                  </ul>
+                </div>
+      
+                <!-- Social Media Section -->
+                <div class="col-lg-6 col-md-6 social-media-links" data-aos="fade-up" data-aos-delay="200">
+                  <h2 class="section-title">Follow Us</h2>
+                  <div class="social-links">
+                    <!-- Social media icons -->
+                    <a href="https://www.facebook.com/motoheal" target="_blank" class="social-icon facebook" data-toggle="tooltip" data-placement="top" title="Follow us on Facebook">
+                      <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://www.twitter.com/motoheal" target="_blank" class="social-icon twitter" data-toggle="tooltip" data-placement="top" title="Follow us on Twitter">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/motoheal" target="_blank" class="social-icon instagram" data-toggle="tooltip" data-placement="top" title="Follow us on Instagram">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/motoheal" target="_blank" class="social-icon linkedin" data-toggle="tooltip" data-placement="top" title="Follow us on LinkedIn">
+                      <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.pinterest.com/motoheal" target="_blank" class="social-icon pinterest" data-toggle="tooltip" data-placement="top" title="Follow us on Pinterest">
+                      <i class="fab fa-pinterest"></i>
+                    </a>
+                    <a href="https://www.youtube.com/motoheal" target="_blank" class="social-icon youtube" data-toggle="tooltip" data-placement="top" title="Follow us on YouTube">
+                      <i class="fab fa-youtube"></i>
+                    </a>
+                  </div>
+      
+                  <!-- Home button -->
+                  <div class="home-button" data-aos="fade-up" data-aos-delay="300">
+                    <a href="/" class="btn btn-home">
+
+                      <i class="fas fa-home"></i> Return to Homepage
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+      
+            <!-- Social Media and Operating Hours Section Ends here-->
+      
+      
+      
+                  
+      
+      
+      
+      
+      
+      
+      
+      
+          
+      
+          
+         
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+          <script src="AOS_dist/aos.js"></script>
+          <script>
+            AOS.init({
+              easing: "case-in-out-sine",
+            });
+          </script>
+
+
+
+   
 </body>
 </html>

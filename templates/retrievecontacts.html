@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Submissions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Contact Form Submissions</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Full Name</th>
+                        <th>Email</th>
+                        <th>Subject</th>
+                        <th>Message</th>
+                        <th>Submission Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                        <tr>
+                            <td>{{ contact[0] }}</td> <!-- ID -->
+                            <td>{{ contact[1] }}</td> <!-- Full Name -->
+                            <td>{{ contact[2] }}</td> <!-- Email -->
+                            <td>{{ contact[3] }}</td> <!-- Subject -->
+                            <td>{{ contact[4] }}</td> <!-- Message -->
+                            <td>{{ contact[5] }}</td> <!-- Submission Date -->
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center">No submissions found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('home') }}" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

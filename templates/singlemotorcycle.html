@@ -7,7 +7,7 @@
     {% include 'supportingfiles.html' %}
     <link rel="stylesheet" href="../static/css/footer.css">
 </head>
-<body>
+<body style="font-family: poppins;">
     {% include 'navbar.html' %}
 
     <section class="row p-4">
@@ -18,14 +18,81 @@
             <h3 class="text-center text-success">{{ singlemotorcycle[1] }} {{ singlemotorcycle[2] }}</h3> <!-- Motorcycle make and model -->
         </div>
         <div class="col-md-6">
+        
+            <h4> <b>Model: <span class="text-success">{{ singlemotorcycle[2] }} </span></b></h4> <!-- Engine capacity -->
             <p>{{ singlemotorcycle[9] }}</p> <!-- Motorcycle description -->
-            <h2>KES: <span class="text-warning">{{ singlemotorcycle[4] }}</span></h2> <!-- Motorcycle price -->
-            <h3>Engine Capacity: <span class="text-info">{{ singlemotorcycle[5] }} cc</span></h3> <!-- Engine capacity -->
-            <h3>Type: <span class="text-info">{{ singlemotorcycle[6] }}</span></h3> <!-- Motorcycle type -->
-            <h3>Mileage: <span class="text-info">{{ singlemotorcycle[7] }} km</span></h3> <!-- Mileage -->
-            <h3>Fuel Type: <span class="text-info">{{ singlemotorcycle[8] }}</span></h3> <!-- Fuel type -->
+            <h5><b>Engine Capacity: <span class="text-success">{{ singlemotorcycle[5] }} cc</span></b></h5> <!-- Engine capacity -->
+            <h5> <b>Type: <span class="text-success">{{ singlemotorcycle[6] }}</span></b></h5> <!-- Motorcycle type -->
+            <h5><b>Mileage: <span class="text-success">{{ singlemotorcycle[7] }} km</span></b></h5> <!-- Mileage -->
+            <h5><b>Fuel Type: <span class="text-success">{{ singlemotorcycle[8] }}</span></b></h5> <!-- Fuel type -->
+            <h5><b>KES: <span class="text-danger">{{ singlemotorcycle[4] }}</span></b></h5> <!-- Motorcycle price -->
         </div>
     </section>
+
+
+    <!-- <h3>You may also like:</h3>
+    <ul style="display: flex; flex-wrap: wrap; list-style-type: none; padding: 0;">
+        {% for image in similar %}
+        <li style="margin: 10px;">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../static/images/{{image[10]}}" height="100" width="100">
+    
+                    <div class="overlay">
+                        <a href="/singlecar/{{image[0]}}" class="buy-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="detail-box">
+                <b class="text-dark">{{image[2]}}</b>
+                <b class="text-warning">KES {{image[4]}}</b>
+            </div>
+        </li>
+        {% endfor %}
+    </ul> -->
+
+
+
+
+    <section class="row justify-content-center">
+        <div class="col-md-6 p-4">
+            {% if session["key"] %}
+            <div class="card shadow p-4" style="border-radius: 10px; background-color: #f8f9fa;">
+                <h3 class="text-center text-primary mb-4">Complete Payment</h3>
+                <form action="/mpesapayment" method="post">
+                    <div class="mb-4">
+                        <label for="phone" class="form-label" style="font-weight: bold;">Phone Number</label>
+                        <input type="number" id="phone" name="phone" placeholder="Enter Tel:(format: 2547...)" 
+                               class="form-control p-3" required 
+                               style="border: 1px solid #007bff; border-radius: 5px; font-size: 1.1em;">
+                    </div>
+    
+                    <div class="mb-4">
+                        <label for="amount" class="form-label" style="font-weight: bold;">Amount</label>
+                        <input type="number" id="amount" name="amount" value="{{singlemotorcycle[4]}}" 
+                               class="form-control p-3" readonly 
+                               style="border: 1px solid #6c757d; border-radius: 5px; font-size: 1.1em;">
+                    </div>
+    
+                    <div class="text-center">
+                        <input type="submit" value="Pay Now" class="btn btn-success w-100" 
+                               style="border-radius: 5px; font-size: 1.2em; padding: 10px;">
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div class="alert alert-warning text-center mt-4">
+                <h4>Login to complete the payment</h4>
+                <a href="/login" class="btn btn-primary">Login</a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+
+
+
 
     <!-- footer -->
     {% include 'footer.html' %}

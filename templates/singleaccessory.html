@@ -7,7 +7,7 @@
     {% include 'supportingfiles.html' %}
     <link rel="stylesheet" href="../static/css/footer.css">
 </head>
-<body>
+<body style="font-family: poppins;">
     {% include 'navbar.html' %}
 
     <section class="row p-4">
@@ -18,13 +18,81 @@
             <h3 class="text-center text-success">{{ singleaccessory[1] }}</h3> <!-- Accessory name -->
         </div>
         <div class="col-md-6">
+            <h5><b>Name: <span class="text-danger">{{ singleaccessory[1] }}</span></b></h5>
             <p>{{ singleaccessory[5] }}</p> <!-- Accessory description -->
-            <h2>KES: <span class="text-warning">{{ singleaccessory[3] }}</span></h2> <!-- Accessory price -->
-            <h3>Category: <span class="text-info">{{ singleaccessory[2] }}</span></h3> <!-- Accessory category -->
-            <h3>Brand: <span class="text-info">{{ singleaccessory[4] }}</span></h3> <!-- Accessory brand -->
-            <h3>Stock Quantity: <span class="text-info">{{ singleaccessory[7] }}</span></h3> <!-- Stock quantity -->
+            <h5><b>Category: <span class="text-success">{{ singleaccessory[2] }}</span></b></h5> <!-- Accessory category -->
+            <h5><b>Brand: <span class="text-success">{{ singleaccessory[4] }}</span></b></h5> <!-- Accessory brand -->
+            <h5><b>Stock Quantity: <span class="text-success">{{ singleaccessory[7] }}</span></b></h5> <!-- Stock quantity -->
+            <h5><b>KES: <span class="text-danger">{{ singleaccessory[3] }}</span></b></h5> <!-- Accessory price -->
         </div>
     </section>
+
+    <!-- {{similar}} -->
+
+
+
+    <h3>You may also like:</h3>
+    <ul style="display: flex; flex-wrap: wrap; list-style-type: none; padding: 0;">
+        {% for image in similar %}
+        <li style="margin: 10px;">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../static/images/{{image[6]}}" height="100" width="100">
+    
+                    <!-- <div class="overlay">
+                        <a href="/singlecar/{{image[0]}}" class="buy-btn">Buy Now</a>
+                    </div> -->
+                </div>
+            </div>
+    
+            <div class="detail-box">
+                <b class="text-dark">{{image[1]}}</b>
+                <b class="text-danger">KES {{image[3]}}</b>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+
+    <section class="row justify-content-center">
+        <div class="col-md-6 p-4">
+            {% if session["key"] %}
+            <div class="card shadow p-4" style="border-radius: 10px; background-color: #f8f9fa;">
+                <h3 class="text-center text-primary mb-4">Complete Payment</h3>
+                <form action="/mpesapayment" method="post">
+                    <div class="mb-4">
+                        <label for="phone" class="form-label" style="font-weight: bold;">Phone Number</label>
+                        <input type="number" id="phone" name="phone" placeholder="Enter Tel:(format: 2547...)" 
+                               class="form-control p-3" required 
+                               style="border: 1px solid #007bff; border-radius: 5px; font-size: 1.1em;">
+                    </div>
+    
+                    <div class="mb-4">
+                        <label for="amount" class="form-label" style="font-weight: bold;">Amount</label>
+                        <input type="number" id="amount" name="amount" value="{{singleaccessory[3]}}" 
+                               class="form-control p-3" readonly 
+                               style="border: 1px solid #6c757d; border-radius: 5px; font-size: 1.1em;">
+                    </div>
+    
+                    <div class="text-center">
+                        <input type="submit" value="Pay Now" class="btn btn-success w-100" 
+                               style="border-radius: 5px; font-size: 1.2em; padding: 10px;">
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div class="alert alert-warning text-center mt-4">
+                <h4>Login to complete the payment</h4>
+                <a href="/login" class="btn btn-primary">Login</a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+
+
+
 
     <!-- footer -->
     {% include 'footer.html' %}

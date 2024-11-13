@@ -7,7 +7,7 @@
     {% include 'supportingfiles.html' %}
     <link rel="stylesheet" href="../static/css/footer.css">
 </head>
-<body>
+<body style="font-family: poppins">
     {% include 'navbar.html' %}
     <!-- {{car}} -->
 
@@ -17,15 +17,78 @@
 
             <h3 class="text-center text-success">{{ car[2] }}</h3>
         </div>
-        <div class="col-md-6">
-            <p>{{car[9]}}</p>
-            <h2>Kes: <span class="text-warning">{{car[4]}}</span></h2>
-            <h3>Category: <span class="text-info">{{car[10]}}</span></h3>
+        <div class="col-md-6" style="font-family: poppins">
+            <p style="font-family: poppins">{{car[9]}}</p>
+            <h4><b>Fuel:</b> <span class="text-success">{{car[6]}}</span></h4>
+            <h4><b>Transmission: </b> <span class="text-success">{{car[5]}}</span></h4>
+            <h4><b>Engine Size:</b> <span class="text-success">{{car[7]}}</span></h4>
+            <h4>KES: <b><span class="text-danger">{{car[4]}}</span> </b></h4>
+
         </div>
     </section>
 
-    
+    <!-- {{similar}} -->
 
+
+    <h3>You may also like:</h3>
+    <ul style="display: flex; flex-wrap: wrap; list-style-type: none; padding: 0;">
+        {% for image in similar %}
+        <li style="margin: 10px;">
+            <div class="box">
+                <div class="slide-img">
+                    <img src="../static/images/{{image[8]}}" height="100" width="100">
+    
+                    <div class="overlay">
+                        <a href="/singlecar/{{image[0]}}" class="buy-btn">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="detail-box">
+                <b class="text-dark">{{image[2]}}</b>
+                <b class="text-warning">KES {{image[4]}}</b>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+    
+    <section class="row justify-content-center">
+        <div class="col-md-6 p-4">
+            {% if session["key"] %}
+            <div class="card shadow p-4" style="border-radius: 10px; background-color: #f8f9fa;">
+                <h3 class="text-center text-primary mb-4">Complete Payment</h3>
+                <form action="/mpesapayment" method="post">
+                    <div class="mb-4">
+                        <label for="phone" class="form-label" style="font-weight: bold;">Phone Number</label>
+                        <input type="number" id="phone" name="phone" placeholder="Enter Tel:(format: 2547...)" 
+                               class="form-control p-3" required 
+                               style="border: 1px solid #007bff; border-radius: 5px; font-size: 1.1em;">
+                    </div>
+    
+                    <div class="mb-4">
+                        <label for="amount" class="form-label" style="font-weight: bold;">Amount</label>
+                        <input type="number" id="amount" name="amount" value="{{car[4]}}" 
+                               class="form-control p-3" readonly 
+                               style="border: 1px solid #6c757d; border-radius: 5px; font-size: 1.1em;">
+                    </div>
+    
+                    <div class="text-center">
+                        <input type="submit" value="Pay Now" class="btn btn-success w-100" 
+                               style="border-radius: 5px; font-size: 1.2em; padding: 10px;">
+                    </div>
+                </form>
+            </div>
+            {% else %}
+            <div class="alert alert-warning text-center mt-4">
+                <h4>Login to complete the payment</h4>
+                <a href="/login" class="btn btn-primary">Login</a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    
+    
+    
 
     <!-- footer -->
     {% include 'footer.html' %}

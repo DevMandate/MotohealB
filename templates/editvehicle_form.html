@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Vehicle</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Edit Vehicle</h2>
+    <form action="{{ url_for('edit_vehicle', id=vehicle.id) }}" method="POST" class="p-4 border rounded">
+        <div class="form-group">
+            <label for="make">Make</label>
+            <input type="text" class="form-control" id="make" name="make" value="{{ vehicle.make }}" required>
+        </div>
+        <!-- Repeat similarly for model, year, price, mileage, fuel_type, transmission, color, description, image_url -->
+        
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="availability" name="availability" {% if vehicle.availability %}checked{% endif %}>
+            <label class="form-check-label" for="availability">Available</label>
+        </div>
+        
+        <button type="submit" class="btn btn-primary mt-3">Update</button>
+        <a href="{{ url_for('vehicles') }}" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Vehicles List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Vehicles List</h2>
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>Price</th>
+                <th>Mileage</th>
+                <th>Fuel Type</th>
+                <th>Transmission</th>
+                <th>Color</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Availability</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.make }}</td>
+                <td>{{ vehicle.model }}</td>
+                <td>{{ vehicle.year }}</td>
+                <td>{{ vehicle.price }}</td>
+                <td>{{ vehicle.mileage }}</td>
+                <td>{{ vehicle.fuel_type }}</td>
+                <td>{{ vehicle.transmission }}</td>
+                <td>{{ vehicle.color }}</td>
+                <td>{{ vehicle.description }}</td>
+                <td><img src="{{ vehicle.image_url }}" alt="Image" width="50"></td>
+                <td>{{ 'Available' if vehicle.availability else 'Not Available' }}</td>
+                <td>
+                    <!-- Inside the <td> for Actions -->
+                    <a href="{{ url_for('edit_vehicle', id=vehicle.id) }}" class="btn btn-sm btn-primary">Edit</a>
+                    <form action="{{ url_for('delete_vehicle', id=vehicle.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

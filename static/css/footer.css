@@ -61,6 +61,7 @@ footer {
   form {
     padding-bottom: 15px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #ccc;
